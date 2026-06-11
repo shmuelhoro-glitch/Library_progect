@@ -98,34 +98,8 @@
 | `email` | כתובת מייל — ייחודית, עמודה לא ריקה |
 | `is_active` | האם החבר פעיל — FALSE לא יכול להשאיל עמודה לא ריקה |
 | `total_borrows` | מונה סה"כ השאלות — עולה ב-1 בכל השאלה עמודה לא ריקה |
+#
 
-## מודול פייטון database
-
-### `db_connection.py` — פונקציות
-
-| פונקציה | תפקיד |
-| ----- | ----: |
-| `get_connection` | יוצר חיבור ל-MySQL — כל מחלקת DB משתמשת בה |
-| `create_tables` | יוצר את טבלאות `books` ו-`members` אם לא קיימות — רץ בעליית השרת, בתחילת פונק main |
-
-### מחלקות OOP — `BookDB`
-
-אחראי על כל פעולות SQL מול טבלת `books`.
-
-| מתודה | מי קורא לה | מה היא עושה |
-| ----- | ----- | ----- |
-| `create_book(data)` | `POST /books` | INSERT לטבלת books — `is_available=True`, `borrowed_by=NULL` |
-| `get_all_books()` | `GET /books` | מחזירה רשימת כל הספרים |
-| `get_book_by_id(id)` | `GET /books/{id}` | מחזירה ספר אחד על פי ID או None |
-| `update_book(id, data)` | `PUT /books/{id}` | מעדכן שדות שנשלחו |
-| `set_available(id, val, member_id)` | `PUT /books/{id}/return/{member_id} PUT /books/{id}/borrow/{member_id}` | מעדכן `is_available` ו-`borrowed_by_member_id` |
-| `count_total_books()` | `GET /reports/summary` | סופר את סך כל הספרים במסד הנתונים |
-| `count_available_books()` | `GET /reports/summary` | סופר ספרים עם `is_available=True` |
-| `count_borrowed_books()` | `GET /reports/summary` | סופר ספרים עם `is_available=False` |
-| `count_by_genre(genre)` | `GET /reports/books-by-genre` | סופר ספרים לפי ז'אנר |
-| `count_active_borrows_by_member(member_id)` | `PUT /books/{id}/borrow/{member_id}` | סופר כמה ספרים החבר מחזיק כרגע (לאכיפת חוק 7\) — ספירת books עם borrowed\_by\_member\_id השווה ל-member\_id |
-
-## 
 
 ## חוקי מערכת
 
@@ -192,6 +166,7 @@ time | level | message
 
 לקוח מבצע קריאה לשרת -> הקריאה מגיעה לראוטר שמעביר למודול המתאים -> אם הקריאה היא יצירה או עדכון ולידציה ראשונה על הקלט מתבצעת באמצעות pydantic -> קריאות קבלת נתונים ללא סינון מועברות ישר לפונקציה המתאימה שקוראת מהדאטה ומחזירה את הדרוש, ואם זה קריאה שצריכה לקבל מסנן או כל דבר אחר שדורש וולידציה אז הפונקציה מהקריאה תעביר לוולידציה שתבקש ממודול הדאטה את הנתונים ותחזיר ללקוח
 
+#
 
 
 
