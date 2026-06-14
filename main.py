@@ -12,19 +12,19 @@ from contextlib import asynccontextmanager
 
 @asynccontextmanager
 async def lifespan(app:FastAPI):
-    db.init_db
-    db.init_tables
-    db._connection
+    db.init_db()
+    db.init_tables()
+    db.get_connection
 
     print("welcome")
     logger.info("Connection to the database has been established.")
 
     yield
 
-    db._connection.close()
+    db.get_connection.close()
     print("shot down")
     logger.info("Data connection closed, system is shutting down.")
-    db._connection.close()
+    
 
 
 

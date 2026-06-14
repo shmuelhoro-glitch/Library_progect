@@ -78,8 +78,8 @@ class BookDB:
             return data
 
     def count_borrowed_books_in_db(self):
-        with db._connection.cursor(dictionary=True) as cursor:
-            cursor.execute("SELECT * FROM books WHERE is_available = False")
+        with db._connection.cursor() as cursor:
+            cursor.execute("SELECT COUNT(*) FROM books WHERE is_available = 0")
             data = cursor.fetchone()
             return data
 
