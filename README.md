@@ -35,12 +35,12 @@
 ```USE library_db;```
 
 #### יצירת הטבלה "books"  באופן ידני:
-```CREATE TABLE IF NOT EXISTS books (id INT AUTO_INCREMENT PRIMARY KEY, title VARCHAR(50) NOT NULL, author VARCHAR(50) NOT NULL, genre ENUM( 'Fiction', 'Non-Fiction', 'Science', 'History', 'Other' ) NOT NULL , is_available BOOLEAN DEFAULT TRUE, borrowed_by_member_id INT DEFAULT NULL);```
+```CREATE TABLE IF NOT EXISTS books (id INT AUTO_INCREMENT PRIMARY KEY, title VARCHAR(50) NOT NULL, author VARCHAR(50) NOT NULL, genre ENUM( 'Fiction', 'Non-Fiction', 'Science', 'History', 'Other' ) NOT NULL , is_available BOOLEAN DEFAULT TRUE NOT NULL, borrowed_by_member_id INT DEFAULT NULL);```
 
 
 
 #### יצירת הטבלה "members"  באופן ידני:
-```CREATE TABLE IF NOT EXISTS members (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50) NOT NULL, email VARCHAR(50) UNIQUE NOT NULL, is_active BOOLEAN DEFAULT TRUE, total_borrows INT NOT NULL);```
+```CREATE TABLE IF NOT EXISTS members (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50) NOT NULL, email VARCHAR(50) UNIQUE NOT NULL, is_active BOOLEAN DEFAULT TRUE NOT NULL, total_borrows INT NOT NULL);```
 
 
 
@@ -66,7 +66,8 @@
         │ ├── member_routes.py
         │ └── report_routes.py
         ├── logs/
-        │ └── app.log
+        │ ├── app.log
+        | └── logger_app.py 
         │
         ├── README.md
         ├── requirements.txt
